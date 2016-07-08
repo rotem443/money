@@ -84,6 +84,14 @@ class Money
       rescue UnknownCurrency
         nil
       end
+      
+      def find_by_symbol(symbol)
+        num = num.to_s
+        id, _ = self.table.find{|key, currency| currency[:symbol] == symbol}
+        new(id)
+      rescue UnknownCurrency
+        nil
+      end
 
       # Wraps the object in a +Currency+ unless it's already a +Currency+
       # object.
